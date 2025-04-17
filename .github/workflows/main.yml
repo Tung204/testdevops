@@ -1,0 +1,36 @@
+name: Selenium Registration Test
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:  # Cho phép chạy tay
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install selenium webdriver-manager
+
+      - name: Download Chrome
+        uses: browser-actions/setup-chrome@v1
+
+      - name: Run Selenium test
+        env:
+          DISPLAY: :99
+        run: |
+          # Chạy trong chế độ headless để không cần giao diện
+          python kt_dangky.py
