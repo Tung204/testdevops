@@ -158,6 +158,9 @@ if __name__ == "__main__":
     try:
         tester.navigate_to_register()
         tester.register(*TEST_DATA["valid"])
+        with open("page_source.html", "w", encoding="utf-8") as f:
+            f.write(tester.driver.page_source)
+        tester.driver.save_screenshot("screenshot.png")
         assert tester.verify_registration_success(), "Xác minh đăng ký  thành công!"
     finally:
         tester.close()
