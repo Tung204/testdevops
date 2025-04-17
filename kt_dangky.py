@@ -149,7 +149,7 @@ if __name__ == "__main__":
         "0351234449",                 # Điện thoại hợp lệ (theo regex: 0[35789]\d{8})
         "new_user_2@example.com",       # Email
         "123 Street, City",           # Địa chỉ
-       "D:\devops\\avatar.png"  # Đường dẫn ảnh (đảm bảo file tồn tại)
+       os.path.join("assets", "avatar.png")  # Đường dẫn ảnh (đảm bảo file tồn tại)
         )
     }
 
