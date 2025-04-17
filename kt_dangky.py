@@ -12,11 +12,14 @@ class FruittablesRegister:
     def __init__(self):
         # Cấu hình Chrome Options để bỏ qua lỗi chứng chỉ SSL khi truy cập theo IP
         chrome_options = Options()
+        chrome_options.add_argument("--headless")
+        chrome_options.add_argument("--disable-gpu")
+        chrome_options.add_argument("--window-size=1920,1080")
         chrome_options.add_argument("--ignore-certificate-errors")
         chrome_options.add_argument("--allow-insecure-localhost")
-        chrome_options.add_argument("--disable-gpu")
         chrome_options.add_argument("--no-sandbox")
         chrome_options.add_argument("--disable-dev-shm-usage")
+        chrome_options.add_argument(f"--user-data-dir=/tmp/chrome-user-data-{os.getpid()}")  # <== Thêm dòng này
 
         self.service = Service(ChromeDriverManager().install())
         self.driver = webdriver.Chrome(service=self.service, options=chrome_options)
